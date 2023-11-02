@@ -21,11 +21,11 @@ This project focuses on building a deep learning model to recognize various fash
 - The model is trained on the training data with 7 epochs.
 
 ### 4. Evaluation & Analysis
-- Evaluated the trained model on the test data and calculate classification accuracy.
+- Evaluated the trained model on the test data and calculated classification accuracy that consisted of various matrices.
 - Generated a confusion matrix, a heatmap and a classification report for a more detailed analysis.
 
 ### 5. Saving and Deployment
-- The trained model is saved to a file  `model_nitex_task.h5` for future use.
+- The trained model is saved to a file  `model_nitex_task.h5` for future use especially for the evaluation file named `evaluation_model.py`
 - The instructions for deploying the model and making predictions are given below:
 
 ## Instructions
@@ -50,27 +50,27 @@ This project focuses on building a deep learning model to recognize various fash
 4. Run the evaluation script with the path to the data folder as an argument:
 
    ```
-   python evaluate_model.py /path/to/data_folder
+   python evaluate_model.py data
    ```
 
-   Replace `/path/to/data_folder` with the actual path to the folder containing the dataset for evaluation as in my case it's only `/data`
+   Replace `data` with the actual path to the folder of yours if you're executing that contains the dataset for evaluation as in my case the directory is only `data`
 
-5. The script will load the trained model, evaluate it on the provided dataset, and generate an `output.txt` file with the model's architecture summary, evaluation metrics, and additional insights.
+5. The script will load the trained model, evaluate it on the provided dataset, and generate an `output.txt` file with the model's architecture summary, evaluation metrics and other insights such as the classification report as well.
 
-6. You can analyze the results in the `output.txt` file.
+6. The results can be analyzed in the `output.txt` file.
 
 ### Additional Notes
 
-- The project uses the Fashion MNIST dataset, but you can adapt it for other image classification tasks.
+- The project uses the Fashion MNIST dataset, but you can adapt it for other image classification tasks like taking anything inside NITEX for maintaining the `Human-in-the-loop` strategy.
 
 - Feel free to explore and experiment with the model architecture and hyperparameters to improve performance.
 
-- You can deploy the saved model for making predictions in your own applications.
+- The saved model can be deployed for making predictions in a variety of applications.
 
 ## Contributors
 
 - Syed Md. Afraim
-- syedmohammadafraim@gmail.com
+-     syedmohammadafraim@gmail.com
 
 Feel free to reach out with any questions or feedback!
 
