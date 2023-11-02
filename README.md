@@ -25,7 +25,7 @@ This project focuses on building a deep learning model to recognize various fash
 - Generated a confusion matrix, a heatmap and a classification report for a more detailed analysis.
 
 ### 5. Saving and Deployment
-- The trained model is saved to a file  `model_nitex_task.h5` for future use especially for the evaluation file named `evaluation_model.py`
+- The trained model is saved to a file  `model_nitex_task.h5` for future use especially for the evaluation file named `evaluate_model.py`
 - The instructions for deploying the model and making predictions are given below:
 
 ## Instructions
@@ -60,6 +60,8 @@ This project focuses on building a deep learning model to recognize various fash
 6. The results can be analyzed in the `output.txt` file.
 
 ### Additional Notes
+
+- The `Fashion MNIST - NITEX.ipynb` is a jupyter notebook file that contains a detailed description of whatever I implemented based on the `Fashion Items Recognition with Deep Learning`
 
 - The project uses the Fashion MNIST dataset, but you can adapt it for other image classification tasks like taking anything inside NITEX for maintaining the `Human-in-the-loop` strategy.
 
