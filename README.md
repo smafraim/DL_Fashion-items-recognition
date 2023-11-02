@@ -61,6 +61,8 @@ This project focuses on building a deep learning model to recognize various fash
 
 ### Additional Notes
 
+- The `Fashion MNIST - NITEX.ipynb` is a jupyter notebook file that contains a detailed description of whatever I implemented based on the `Fashion Items Recognition with Deep Learning`
+
 - The project uses the Fashion MNIST dataset, but you can adapt it for other image classification tasks like taking anything inside NITEX for maintaining the `Human-in-the-loop` strategy.
 
 - Feel free to explore and experiment with the model architecture and hyperparameters to improve performance.
