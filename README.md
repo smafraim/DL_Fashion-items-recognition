@@ -25,7 +25,7 @@ This project focuses on building a deep learning model to recognize various fash
 - Generated a confusion matrix, a heatmap and a classification report for a more detailed analysis.
 
 ### 5. Saving and Deployment
-- The trained model is saved to a file  `model_nitex_task.h5` for future use especially for the evaluation file named `evaluation_model.py`
+- The trained model is saved to a file  `model_nitex_task.h5` for future use especially for the evaluation file named `evaluate_model.py`
 - The instructions for deploying the model and making predictions are given below:
 
 ## Instructions
