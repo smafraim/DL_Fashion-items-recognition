@@ -19,6 +19,5 @@ Total params: 693962 (2.65 MB)
 Trainable params: 693962 (2.65 MB)
 Non-trainable params: 0 (0.00 Byte)
 _________________________________________________________________
-Test Accuracy: 0.9369000196456909 or 93.69%
-Classification Accuracy: 0.9369 or 93.69%
-Additional insights or observations go here.
+1. Test Accuracy: 0.9369000196456909 or 93.69%
+2. Classification Accuracy: 0.9369 or 93.69%

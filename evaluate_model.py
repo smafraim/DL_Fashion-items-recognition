@@ -50,6 +50,7 @@ if __name__ == '__main__':
 
     data_folder = sys.argv[1]
 
+# error handling of path directory just like as ordered in the instructions
     if not os.path.exists(data_folder):
         print(f"Error: The data folder '{data_folder}' does not exist.")
         sys.exit(1)
@@ -68,8 +69,7 @@ if __name__ == '__main__':
     with open('output.txt', 'w') as output_file:
         output_file.write("Model's Architecture Summary:\n")
         model.summary(print_fn=lambda x: output_file.write(x + '\n'))
-        output_file.write(f"Test Accuracy: {test_accuracy} or {round(test_accuracy*100,2)}%\n")
-        output_file.write(f"Classification Accuracy: {accuracy} or {round(accuracy*100,2)}%\n")
-        output_file.write("Additional insights or observations go here.")
+        output_file.write(f"1. Test Accuracy: {test_accuracy} or {round(test_accuracy*100,2)}%\n")
+        output_file.write(f"2. Classification Accuracy: {accuracy} or {round(accuracy*100,2)}%\n")
 
     print("Evaluation complete. Results saved in output.txt.")
