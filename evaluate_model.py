@@ -3,48 +3,73 @@ import sys
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-# Checking if the command-line argument is provided
-if len(sys.argv) < 2:
-    print("Usage: python evaluate_model.py <path_to_dataset_folder>")
-    sys.exit(1)
 
-# Define the path to the dataset folder from the command-line argument
-dataset_folder = sys.argv[1]
+def load_fashion_mnist_test(data_folder):
+    test_data = np.loadtxt(os.path.join(data_folder, "fashion-mnist_test.csv"), delimiter=',', skiprows=1)
+    test_images = test_data[:, 1:] / 255.0  # Normalize pixel values
+    test_images = test_images.reshape(-1, 28, 28, 1)
+    test_labels = test_data[:, 0]  # The first column is the labels
+    return test_images, test_labels
 
-# Check if the dataset folder exists
-if not os.path.exists(dataset_folder):
-    print(f"The provided dataset folder '{dataset_folder}' does not exist.")
-    sys.exit(1)
 
-# Load the trained model
-model = keras.models.load_model('model_nitex_task.h5')
+def load_image_data(data_folder, filename):
+    file_path = os.path.join(data_folder, filename)
+    with open(file_path, 'rb') as file:
+        file_contents = file.read()
+    image_data = np.frombuffer(file_contents, np.uint8, offset=16)
+    return image_data
 
-# Load and preprocess the data
-data = np.load(os.path.join(dataset_folder, 'data.npy'))
-labels = np.load(os.path.join(dataset_folder, 'labels.npy'))
 
-# Evaluate the model on the dataset
-test_loss, test_accuracy = model.evaluate(data, labels)
+def evaluate_fashion_mnist_model(model, data_folder):
+    try:
+        test_images, test_labels = load_fashion_mnist_test(data_folder)
+    except FileNotFoundError:
+        print("Error: The provided data folder does not exist.")
+        sys.exit(1)
 
-# Generate a classification report
-predictions = model.predict(data)
-predicted_labels = np.argmax(predictions, axis=1)
-class_names = ['T-shirt', 'Trousers', 'Pullovers', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle Boot']
-report = classification_report(np.argmax(labels, axis=1), predicted_labels, target_names=class_names)
+    # Evaluating the model on the test data
+    test_loss, test_accuracy = model.evaluate(test_images, test_labels, verbose=0)
 
-# Output file path
-output_file = os.path.join(dataset_folder, 'output.txt')
+    # Generating predictions on the test data
+    predictions = model.predict(test_images)
 
-# Write model architecture summary and evaluation metrics to the output file
-with open(output_file, 'w') as file:
-    file.write("Model's Architecture Summary:\n")
-    model.summary(print_fn=lambda x: file.write(x + '\n'))
-    file.write("\nEvaluation Metrics:\n")
-    file.write(f"Test Loss: {test_loss}\n")
-    file.write(f"Test Accuracy: {test_accuracy}\n")
-    file.write("\nClassification Report:\n")
-    file.write(report)
+    # Calculating the classification accuracy
+    predicted_labels = np.argmax(predictions, axis=1)
+    accuracy = accuracy_score(test_labels, predicted_labels)
 
-print(f"Model evaluation completed. Results saved in '{output_file}'.")
+    return test_accuracy, accuracy
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python evaluate_model.py <data_folder>")
+        sys.exit(1)
+
+    data_folder = sys.argv[1]
+
+    if not os.path.exists(data_folder):
+        print(f"Error: The data folder '{data_folder}' does not exist.")
+        sys.exit(1)
+
+    # Loading trained model
+    model = keras.models.load_model('model_nitex_task.h5')
+
+    # Loading the test images
+    filename = 't10k-images-idx3-ubyte'
+    image_data_test = load_image_data(data_folder, filename)
+
+    # Evaluating the model
+    test_accuracy, accuracy = evaluate_fashion_mnist_model(model, data_folder)
+
+    # Generating the output.txt file
+    with open('output.txt', 'w') as output_file:
+        output_file.write("Model's Architecture Summary:\n")
+        model.summary(print_fn=lambda x: output_file.write(x + '\n'))
+        output_file.write(f"Test Accuracy: {test_accuracy} or {round(test_accuracy*100,2)}%\n")
+        output_file.write(f"Classification Accuracy: {accuracy} or {round(accuracy*100,2)}%\n")
+        output_file.write("Additional insights or observations go here.")
+
+    print("Evaluation complete. Results saved in output.txt.")
