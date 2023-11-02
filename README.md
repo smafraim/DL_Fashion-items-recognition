@@ -13,12 +13,12 @@ This project focuses on building a deep learning model to recognize various fash
 
 ### 2. Model Architecture
 - Designed a Convolutional Neural Network (CNN) for image classification.
-- The CNN consists of convolutional layers, max-pooling layers, and fully connected layers.
+- The CNN consists of 2 convolutional layers, 1 max-pooling layers, and several fully connected layers.
 - Utilized the ReLU activation function and softmax activation for the output layer.
 
 ### 3. Training
 - Compiled the model with an appropriate optimizer named `adam optimizer`, loss function named `sparse_categorical_crossentropy`, and `accuracy` from metrics.
-- The model is trained on the training data with 5 epochs.
+- The model is trained on the training data with 7 epochs.
 
 ### 4. Evaluation & Analysis
 - Evaluated the trained model on the test data and calculate classification accuracy.
